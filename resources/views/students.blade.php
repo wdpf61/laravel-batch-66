@@ -1,11 +1,6 @@
 
-
-
  <h1>Student Id: {{$id}}</h1>
  <h1>Student name: {{$name}}</h1>
-
-
-
 <table>
     <tr>
         <th>Id</th>
