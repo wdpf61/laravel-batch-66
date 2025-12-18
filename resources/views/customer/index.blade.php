@@ -17,6 +17,13 @@
     </style>
   </head>
   <body>
+     @if (session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+
+     @endif
+
     <h3>Customer List</h3>
    <table class="table">
   <thead>
