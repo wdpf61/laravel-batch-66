@@ -8,6 +8,10 @@ php artisan migrate:rollback
 
 php artisan make:factory CustomerFactory
 php artisan make:model Customer
-
 php artisan db:seed
+
+php artisan storage:link
+php artisan lang:publish
+
+
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -39,12 +40,29 @@ class CustomerController extends Controller
     function save(Request $request){
       print_r($request->all());
 
+      $request->validate([
+         "name"=> "required|min:3",
+         "email"=> "email|unique:customers,email",
+      ],
+      [
+        "name.required"=>"Please give a name"
+      ]);
+
+       $image="";
+       $imgname="";
+       if( $request->hasFile("photo")){
+        // $image= $request->file("photo")->store("photo/customer", "public");
+        $imgname= $request->name.".".$request->file("photo")->extension();
+        $request->file("photo")->storeAs("photo/customer",$imgname,"public");
+       }
+
+
       $customer= new Customer();
       $customer->name= $request->name;
       $customer->email= $request->email;
       $customer->phone= $request->phone;
       $customer->address= $request->address;
-    //   $customer->photo= $request->photo;
+      $customer->photo= $imgname;
       $customer->save();
 
     //   echo "saved";
@@ -60,10 +78,16 @@ class CustomerController extends Controller
       $customer->email= $request->email;
       $customer->phone= $request->phone;
       $customer->address= $request->address;
-     //   $customer->photo= $request->photo;
-      $customer->update();
 
-      //   echo "saved";
+        if ( $request->hasFile("photo") &&  $customer->photo && Storage::disk('public')->exists("/photo/customer/".$customer->photo)) {
+            Storage::disk('public')->delete("/photo/customer/".$customer->photo);
+
+            $imgname= $request->name.".".$request->file("photo")->extension();
+            $request->file("photo")->storeAs("photo/customer",$imgname,"public");
+
+            $customer->photo= $imgname;
+        }
+     $customer->update();
      return redirect("customer");
     }
 
@@ -72,7 +96,14 @@ class CustomerController extends Controller
     function delete($id){
       //  Customer::find($id)->delete();
        $customer = Customer::find($id);
+
+         if ($customer->photo && Storage::disk('public')->exists("/photo/customer/".$customer->photo)) {
+            Storage::disk('public')->delete("/photo/customer/".$customer->photo);
+         }
+
        $customer->delete();
        return redirect("customer");
+
+
     }
 }
