@@ -5,7 +5,10 @@ use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "Hello World";
+    return view("pages.erp.dashboard.index");
+});
+Route::get('/test', function () {
+    return view("pages.erp.dashboard.test");
 });
 
 Route::get("/harun", function(){
@@ -33,21 +36,16 @@ Route::get("/student/update/{id}/{name}", [StudentController::class, 'update']);
 Route::get("/student/delete/{id}", [StudentController::class, 'delete']);
 
 
-Route::prefix("customer")->controller(CustomerController::class)->group(function(){
-    Route::get("/", "index");
-    Route::get("create", "create");
-    Route::post("save", "save");
-    Route::delete("delete/{id}", "delete");
-    Route::get("edit/{id}", "edit");
-    Route::post("update/{id}", "update");
-});
+// Route::prefix("customer")->controller(CustomerController::class)->group(function(){
+//     Route::get("/", "index");
+//     Route::get("create", "create");
+//     Route::post("save", "save");
+//     Route::delete("delete/{id}", "delete");
+//     Route::get("edit/{id}", "edit");
+//     Route::post("update/{id}", "update");
+// });
 
-// Route::get("/customer", [CustomerController::class, "index"]);
-// Route::get("/customer/create", [CustomerController::class, "create"]);
-// Route::post("/customer/save", [CustomerController::class, "save"]);
-// Route::delete("/customer/delete/{id}", [CustomerController::class, "delete"]);
-// Route::get("/customer/edit/{id}", [CustomerController::class, "edit"]);
-// Route::post("/customer/update/{id}", [CustomerController::class, "update"]);
+
 
 Route::fallback(function(){
    return "404 No Route matched";
