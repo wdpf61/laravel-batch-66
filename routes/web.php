@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,8 +12,8 @@ Route::get('/test', function () {
     return view("pages.erp.dashboard.test");
 });
 
-Route::get("/harun", function(){
-     return "Hello Harun or Rashid";
+Route::get("/harun", function () {
+    return "Hello Harun or Rashid";
 });
 
 // Route::get( "/students/", function(){
@@ -36,7 +37,7 @@ Route::get("/student/update/{id}/{name}", [StudentController::class, 'update']);
 Route::get("/student/delete/{id}", [StudentController::class, 'delete']);
 
 
-Route::prefix("customer")->controller(CustomerController::class)->group(function(){
+Route::prefix("customer")->controller(CustomerController::class)->group(function () {
     Route::get("/", "index");
     Route::get("create", "create");
     Route::post("save", "save");
@@ -45,10 +46,14 @@ Route::prefix("customer")->controller(CustomerController::class)->group(function
     Route::post("update/{id}", "update");
 });
 
+Route::prefix("system")->group(function () {
+    Route::resource('users', UserController::class);
+});
 
 
-Route::fallback(function(){
-   return "404 No Route matched";
+
+Route::fallback(function () {
+    return "404 No Route matched";
 });
 //   php artisan make:controller StudentController
 
