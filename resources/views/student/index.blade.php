@@ -10,10 +10,10 @@
 </style>
 @endsection
 
-
-
-
 @section("content")
+
+ <x-button :url="URL('student/create')"  type="secondary">Create Student</x-button>
+
 
 <table class="table">
   <thead>

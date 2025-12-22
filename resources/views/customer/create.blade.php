@@ -34,23 +34,17 @@
 <form action="{{URL("customer/save")}}" method="POST" enctype="multipart/form-data" class="p-4 border rounded">
    @csrf
   <!-- Name -->
-  <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input type="text" name="name" class="form-control" placeholder="Enter name">
-    @error("name")
-        <span class="text-danger">{{$message}}</span>
-    @enderror
-  </div>
+    <x-input-element type="text" name="name"  label="Name"/>
 
   <!-- Email -->
-  <div class="mb-3">
+  {{-- <div class="mb-3">
     <label class="form-label">Email</label>
     <input type="email" name="email" class="form-control" placeholder="Enter email">
        @error("email")
         <span class="text-danger">{{$message}}</span>
     @enderror
-  </div>
-
+  </div> --}}
+   <x-input-element type="email" name="email"  label="Email"/>
   <!-- Phone -->
   <div class="mb-3">
     <label class="form-label">Phone</label>

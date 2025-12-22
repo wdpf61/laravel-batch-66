@@ -73,7 +73,7 @@ class CustomerController extends Controller
         $customer->save();
 
         //   echo "saved";
-        return redirect("customer");
+        return redirect("customer")->with("success", "Customer Created successfully");
     }
 
 

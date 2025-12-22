@@ -59,11 +59,11 @@
 	<!-- Begin Wrapper -->
 	<div class="main-wrapper">
 
-         @include("layout.erp.partials.header");
+         @include("layout.erp.partials.header")
 
 
 
-         @include("layout.erp.partials.sidebar");
+         @include("layout.erp.partials.sidebar")
 
 
 

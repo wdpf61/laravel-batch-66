@@ -27,7 +27,7 @@ Route::get("/harun", function(){
 
 // });
 
-Route::get("/customers", [CustomerController::class, "index"]);
+// Route::get("/customers", [CustomerController::class, "index"]);
 Route::get("/student", [StudentController::class, 'index']);
 Route::get("/student/create", [StudentController::class, 'create']);
 Route::get("/student/find/{id}", [StudentController::class, 'find']);
@@ -36,14 +36,14 @@ Route::get("/student/update/{id}/{name}", [StudentController::class, 'update']);
 Route::get("/student/delete/{id}", [StudentController::class, 'delete']);
 
 
-// Route::prefix("customer")->controller(CustomerController::class)->group(function(){
-//     Route::get("/", "index");
-//     Route::get("create", "create");
-//     Route::post("save", "save");
-//     Route::delete("delete/{id}", "delete");
-//     Route::get("edit/{id}", "edit");
-//     Route::post("update/{id}", "update");
-// });
+Route::prefix("customer")->controller(CustomerController::class)->group(function(){
+    Route::get("/", "index");
+    Route::get("create", "create");
+    Route::post("save", "save");
+    Route::delete("delete/{id}", "delete");
+    Route::get("edit/{id}", "edit");
+    Route::post("update/{id}", "update");
+});
 
 
 
