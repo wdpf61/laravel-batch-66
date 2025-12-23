@@ -44,9 +44,15 @@ Route::prefix("customer")->controller(CustomerController::class)->group(function
     Route::delete("delete/{id}", "delete");
     Route::get("edit/{id}", "edit");
     Route::post("update/{id}", "update");
+    Route::get("trashed", "trashed");
+    Route::get("restore/{id}", "restore");
+    Route::delete("force-delete/{id}", "force_delete");
 });
 
 Route::prefix("system")->group(function () {
+    Route::get("users/trashed", [UserController::class,"trashed"])->name("user.trashed");
+    Route::get("users/restore/{id}", [UserController::class,"restore"])->name("user.restore");
+    Route::delete("users/force-delete/{id}", [UserController::class,"force_delete"])->name("user.delete");
     Route::resource('users', UserController::class);
 });
 

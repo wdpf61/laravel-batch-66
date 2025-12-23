@@ -28,6 +28,25 @@ class CustomerController extends Controller
 
 
 
+    function trashed()
+    {
+        $customers = Customer::onlyTrashed()->orderBy("id", "desc")->paginate(8);
+        return view("customer.trashed", compact("customers"));
+    }
+    function force_delete($id)
+    {
+         Customer::withTrashed()->find($id)->forceDelete();
+        return redirect("customer/trashed");
+    }
+
+    function restore($id)
+    {
+         Customer::withTrashed()->find($id)->restore();
+        return redirect("customer");
+    }
+
+
+    
     function create()
     {
         return view("customer.create");
