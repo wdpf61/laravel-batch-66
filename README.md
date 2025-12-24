@@ -32,7 +32,23 @@ conditional activation
 class="{{ Route::is("dashboard.patient")?"active":"" }}"
 class="{{ request()->is("dashboard/admin")?"active":"" }}"
 
+search 
+ $customers = Customer::when($request->search, function($query) use($request) {
+          return $query->whereAny([
+            "name",
+            "email",
+             "id",
+             "phone"
+        ], "LIKE" , "%".$request->search."%" );
 
+        })->orderBy("id", "desc")->paginate(8);
+  {{ $customers->appends(request()->query())->links() }}
+
+
+
+
+
+  
 
 // // Basic SELECT * FROM users
     // $users = DB::table('users')->get();
