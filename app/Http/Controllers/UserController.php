@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,11 +12,17 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
    public function index(){
-    //   $users= User::all();
-      $users= User::select("id","name","email")->paginate(15);
-      return view("pages.erp.user.index", ["users"=>$users]);
+    //   $users= User::with("role:id,name")->get();
+      $users=Role::with("user")->get();
+    //   $users= User::select("id","name","email")->paginate(15);
+    //   return view("pages.erp.user.index", ["users"=>$users]);
 
       //   return view("pages.erp.user.index", compact("users"));
+
+
+
+
+      return $users;
 
    }
 
