@@ -7,6 +7,7 @@
             <th scope="col">#</th>
             <th scope="col">name</th>
             <th scope="col">email</th>
+            <th scope="col">role</th>
             <th scope="col">action</th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
                 <th scope="row">{{ $user->id }}</th>
                 <td> <a href="{{ URL("system/users/$user->id") }}"> {{ $user->name }}</a></td>
                 <td>{{ $user->email }}</td>
+                <td>{{ $user->role?->name ?? "NO Role" }}</td>
                 <td>
                     <a href="{{ URL("system/users/$user->id/edit") }}">Edit</a>
 

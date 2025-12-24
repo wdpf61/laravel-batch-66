@@ -12,15 +12,12 @@ class UserController extends Controller
      * Display a listing of the resource.
      */
    public function index(){
-    //   $users= User::with("role:id,name")->get();
-      $users=Role::with("user")->get();
+      $users= User::with("role:id,name")->get();
+    //   $users=Role::with("user")->get();
     //   $users= User::select("id","name","email")->paginate(15);
     //   return view("pages.erp.user.index", ["users"=>$users]);
 
-      //   return view("pages.erp.user.index", compact("users"));
-
-
-
+      return view("pages.erp.user.index", compact("users"));
 
       return $users;
 
