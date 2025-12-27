@@ -45,10 +45,67 @@ search
   {{ $customers->appends(request()->query())->links() }}
 
 
+DB::enableQueryLog();
+// run code
+dd(DB::getQueryLog());
+
+ajax 
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    }
+});
+
+$.ajax({
+    url: '/get-cities/' + countryId,
+    type: 'GET',
+    success: function (data) {
+        let options = '<option value="">Select City</option>';
+        data.forEach(function (city) {
+            options += `<option value="${city.id}">${city.name}</option>`;
+        });
+        $('#city').html(options);
+    }
+});
+
+Auth 
+
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install
+npm run dev
+
+
+composer require laravel/breeze --dev
+php artisan breeze:install
+
+
+composer require laravel/fortify
+php artisan vendor:publish --provider="Laravel\Fortify\FortifyServiceProvider"
+Enable Features (config/fortify.php)
+'features' => [
+    Features::registration(),
+    Features::resetPasswords(),
+    Features::emailVerification(),
+    Features::twoFactorAuthentication(),
+],
+
+FortifyServiceProvider.php
+use Laravel\Fortify\Fortify;
+public function boot()
+{
+    Fortify::loginView(function () {
+        return view('auth.login');
+    });
+}
+
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+php artisan jetstream:install livewire --teams
 
 
 
-  
 
 // // Basic SELECT * FROM users
     // $users = DB::table('users')->get();

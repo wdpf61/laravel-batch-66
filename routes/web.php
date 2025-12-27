@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassnameController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
@@ -56,6 +57,7 @@ Route::prefix("system")->group(function () {
     Route::resource('users', UserController::class);
 });
 
+Route::get("class", [ClassnameController::class,"index"]);
 
 
 Route::fallback(function () {
