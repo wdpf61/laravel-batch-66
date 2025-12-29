@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 class CustomerController extends Controller
 {
 
+    
+
     function index(Request $request)
     {
         // $customers = Customer::all()->toArray();
@@ -117,8 +119,8 @@ class CustomerController extends Controller
         // print_r($request->all());
         $customer = Customer::find($id);
 
-        Gate::authorize("customerEdit", $customer );
-        
+        Gate::authorize("updateCustomer", $customer );
+
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;

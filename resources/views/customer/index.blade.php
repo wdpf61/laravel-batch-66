@@ -42,9 +42,15 @@
                     <td> <img src="{{ asset('storage/photo/customer') }}/{{ $customer->photo }}" alt=""
                             srcset="" width="100"> </td>
                     <td class="btn btn-group">
-                        @can('customerEdit')
+
+                        @can('updateCustomer', $customer)
                             <a class="btn btn-secondary" href="{{ URL('customer/edit', $customer->id) }}">Edit</a>
                         @endcan
+
+
+
+                         @can("delete_customer", $customer)
+
 
                         <form action="{{ URL('customer/delete', $customer->id) }}" method="post">
                             @csrf
@@ -52,7 +58,7 @@
                             <button onclick="return confirm(`Are you sure`)" type="submit"
                                 class="btn btn-danger">Delete</button>
                         </form>
-
+                       @endcan
 
                     </td>
 

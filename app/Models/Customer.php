@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+ use CustomerPolicy;
 class Customer extends Model
 {
     use HasFactory;
@@ -17,4 +17,8 @@ class Customer extends Model
     protected $hidden = [
         "address"
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, "user_id");
+    }
 }

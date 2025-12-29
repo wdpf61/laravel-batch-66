@@ -32,6 +32,11 @@ conditional activation
 class="{{ Route::is("dashboard.patient")?"active":"" }}"
 class="{{ request()->is("dashboard/admin")?"active":"" }}"
 
+
+Gate and policy
+
+php artisan make:policy CustomerPolicy --model=Customer
+
 search 
  $customers = Customer::when($request->search, function($query) use($request) {
           return $query->whereAny([

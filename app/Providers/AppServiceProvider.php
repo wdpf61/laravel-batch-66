@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Customer;
 use App\Models\User;
+use App\Policies\CustomerPolicy;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define("customerEdit",function(User $user){
             return $user->role_id == 6 || $user->role_id == 1;
         });
+
+       Gate::policy( Customer::class, CustomerPolicy::class);
     }
 }
