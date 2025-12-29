@@ -4,10 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
-class GlobalMiddleWare
+class TerminableMiddleWare
 {
     /**
      * Handle an incoming request.
@@ -16,12 +17,17 @@ class GlobalMiddleWare
      */
     public function handle(Request $request, Closure $next): Response
     {
-         
-        Log::info("log request", [
+        return $next($request);
+    }
+
+    public function terminate($request, $respose){
+            $user = Auth::user();
+            Log::info("log request", [
+             "user_id"=>$user?->id,
              "method"=> $request->method(),
              "url"=> $request->url(),
              "data"=> $request->all(),
         ]);
-        return $next($request);
+
     }
 }
