@@ -1,14 +1,20 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassnameController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view("pages.erp.dashboard.index");
-});
+})->middleware('auth');
+
+
+
+
 Route::get('/test', function () {
     return view("pages.erp.dashboard.test");
 });
@@ -66,3 +72,11 @@ Route::fallback(function () {
 //   php artisan make:controller StudentController
 
 // user  ->  request  ->  controller -> model    -> database
+
+Auth::routes();
+
+Route::match(['get', 'post'],'/logout', [LoginController::class,'logout'])->name('logout');
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
