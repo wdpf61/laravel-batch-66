@@ -48,13 +48,13 @@
   <!-- Phone -->
   <div class="mb-3">
     <label class="form-label">Phone</label>
-    <input type="text" name="phone" class="form-control" placeholder="Enter phone">
+    <input type="text" name="phone" class="form-control" placeholder="Enter phone" value="{{old("phone")}}">
   </div>
 
   <!-- Address -->
   <div class="mb-3">
     <label class="form-label">Address</label>
-    <textarea name="address" class="form-control" rows="3" placeholder="Enter address"></textarea>
+    <textarea name="address" class="form-control" rows="3" placeholder="Enter address"> {{old("name")}}</textarea>
   </div>
 
   <!-- Photo -->
