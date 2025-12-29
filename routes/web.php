@@ -44,7 +44,7 @@ Route::get("/student/update/{id}/{name}", [StudentController::class, 'update']);
 Route::get("/student/delete/{id}", [StudentController::class, 'delete']);
 
 
-Route::prefix("customer")->controller(CustomerController::class)->middleware(['auth','admin'])->group(function () {
+Route::prefix("customer")->controller(CustomerController::class)->middleware(['auth'])->group(function () {
     Route::get("/", "index");
     Route::get("create", "create");
     Route::post("save", "save");

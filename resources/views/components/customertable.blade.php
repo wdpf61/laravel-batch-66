@@ -10,7 +10,10 @@
       {{-- <td> <img src="{{asset("storage" )}}/{{$customer->photo}}" alt="" srcset="" width="100">       </td> --}}
       <td> <img src="{{asset("storage/photo/customer" )}}/{{$customer->photo}}" alt="" srcset="" width="100">       </td>
       <td class="btn btn-group">
-         <a class="btn btn-secondary" href="{{URL("customer/edit", $customer->id)}}">Edit</a>
+         @can("customerEdit")
+          <a class="btn btn-secondary" href="{{URL("customer/edit", $customer->id)}}">Edit</a>
+
+         @endcan
 
          <form action="{{URL("customer/delete", $customer->id)}}" method="post">
             @csrf

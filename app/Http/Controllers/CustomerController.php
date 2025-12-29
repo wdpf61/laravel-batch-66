@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
@@ -35,10 +36,10 @@ class CustomerController extends Controller
 
         })->orderBy("id", "desc")->paginate(8);
 
-          $customers = Customer::select("id", "name", 'address')->paginate(8);
-         return $customers;
+        //  $customers = Customer::select("id", "name", 'address')->paginate(8);
+        //  return $customers;
 
-        // return view("customer.index", compact("customers"));
+        return view("customer.index", compact("customers"));
     }
 
 
@@ -115,6 +116,9 @@ class CustomerController extends Controller
     {
         // print_r($request->all());
         $customer = Customer::find($id);
+
+        Gate::authorize("customerEdit", $customer );
+        
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;

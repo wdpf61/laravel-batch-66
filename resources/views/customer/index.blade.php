@@ -4,9 +4,10 @@
     <h3>Customer List</h3>
 
 
-    <form action="{{URL("customer")}}" method="GET">
+    <form action="{{ URL('customer') }}" method="GET">
         <div class="mb-3">
-            <input value="{{request("search")}}" type="text" class="form-control" id="search" name="search" placeholder="Search data">
+            <input value="{{ request('search') }}" type="text" class="form-control" id="search" name="search"
+                placeholder="Search data">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </form>
@@ -30,7 +31,32 @@
         </thead>
         <tbody>
             @foreach ($customers as $customer)
-                <x-customertable :customer="$customer" />
+                <tr>
+                    <th scope="row">{{ $customer->id }}</th>
+                    <td>{{ $customer->name }}</td>
+                    <td>{{ $customer->email }}</td>
+                    <td>{{ $customer->phone }}</td>
+                    <td>{{ $customer->address }}</td>
+
+                    {{-- <td> <img src="{{asset("storage" )}}/{{$customer->photo}}" alt="" srcset="" width="100">       </td> --}}
+                    <td> <img src="{{ asset('storage/photo/customer') }}/{{ $customer->photo }}" alt=""
+                            srcset="" width="100"> </td>
+                    <td class="btn btn-group">
+                        @can('customerEdit')
+                            <a class="btn btn-secondary" href="{{ URL('customer/edit', $customer->id) }}">Edit</a>
+                        @endcan
+
+                        <form action="{{ URL('customer/delete', $customer->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button onclick="return confirm(`Are you sure`)" type="submit"
+                                class="btn btn-danger">Delete</button>
+                        </form>
+
+
+                    </td>
+
+                </tr>
             @endforeach
         </tbody>
     </table>
