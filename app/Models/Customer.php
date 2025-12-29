@@ -11,6 +11,10 @@ class Customer extends Model
     use HasFactory;
     use SoftDeletes;
 
-    
+
     protected $table = 'customers';
+
+    protected $hidden = [
+        "address"
+    ];
 }

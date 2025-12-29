@@ -35,10 +35,10 @@ class CustomerController extends Controller
 
         })->orderBy("id", "desc")->paginate(8);
 
+          $customers = Customer::select("id", "name", 'address')->paginate(8);
+         return $customers;
 
-
-
-        return view("customer.index", compact("customers"));
+        // return view("customer.index", compact("customers"));
     }
 
 
