@@ -37,6 +37,9 @@ Gate and policy
 
 php artisan make:policy CustomerPolicy --model=Customer
 
+email 
+php artisan make:mail UserNotification
+
 search 
  $customers = Customer::when($request->search, function($query) use($request) {
           return $query->whereAny([

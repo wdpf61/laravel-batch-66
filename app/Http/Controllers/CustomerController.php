@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserNotification;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
 
-    
+
 
     function index(Request $request)
     {
@@ -109,6 +112,8 @@ class CustomerController extends Controller
         $customer->photo = $imgname;
         $customer->save();
 
+        // Mail::to($request->email)->send(new UserNotification($customer));
+
         //   echo "saved";
         return redirect("customer")->with("success", "Customer Created successfully");
     }
@@ -151,5 +156,15 @@ class CustomerController extends Controller
 
         $customer->delete();
         return redirect("customer");
+    }
+    function sendmail()
+    {
+        $users= User::all();
+        foreach ($users as $key => $user) {
+        //    Mail::to($user->email)->send(new UserNotification($user));
+           Mail::to($user->email)->queue(new UserNotification($user));
+        }
+
+       return "Mail has been sent successfully";
     }
 }

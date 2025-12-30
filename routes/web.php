@@ -5,7 +5,9 @@ use App\Http\Controllers\ClassnameController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +20,12 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view("pages.erp.dashboard.test");
 });
+
+
+// Route::get("/email", [StudentController::class, 'email']);
+
+ Route::get("sendmail", [CustomerController::class, "sendmail"]);
+
 
 Route::get("/harun", function () {
     return "Hello Harun or Rashid";
