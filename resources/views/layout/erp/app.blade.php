@@ -149,34 +149,34 @@
 	<!-- End Wrapper -->
 
 	<!-- jQuery -->
-	<script src="{{asset('assets')}}/js/jquery-3.7.1.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/jquery-3.7.1.min.js" ></script>
 
 	<!-- Bootstrap Core JS -->
-	<script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/bootstrap.bundle.min.js" ></script>
 
 	<!-- Daterangepikcer JS -->
-	<script src="{{asset('assets')}}/js/moment.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
-	<script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/moment.min.js" ></script>
+	<script src="{{asset('assets')}}/plugins/daterangepicker/daterangepicker.js" ></script>
 
 	<!-- Simplebar JS -->
-	<script src="{{asset('assets')}}/plugins/simplebar/simplebar.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/plugins/simplebar/simplebar.min.js" ></script>
 
 	<!-- Datetimepicker JS -->
-	<script src="{{asset('assets')}}/js/bootstrap-datetimepicker.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/bootstrap-datetimepicker.min.js" ></script>
 
 	<!-- Chart JS -->
-	<script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
-	<script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/plugins/apexchart/apexcharts.min.js" ></script>
+	<script src="{{asset('assets')}}/plugins/apexchart/chart-data.js" ></script>
 
 	<!-- Datatable JS -->
-	<script src="{{asset('assets')}}/js/jquery.dataTables.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
-    <script src="{{asset('assets')}}/js/dataTables.bootstrap5.min.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/jquery.dataTables.min.js" ></script>
+    <script src="{{asset('assets')}}/js/dataTables.bootstrap5.min.js" ></script>
 
 	<!-- Custom JS -->
-	<script src="{{asset('assets')}}/js/script.js" type="de90384026a73b34442fd480-text/javascript"></script>
+	<script src="{{asset('assets')}}/js/script.js" ></script>
 
-
-<script src="{{asset('assets')}}/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="de90384026a73b34442fd480-|49" defer></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"984022d28cf3786e","version":"2025.9.1","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}' crossorigin="anonymous"></script>
+{{-- <script src="{{asset('assets')}}/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="de90384026a73b34442fd480-|50" ></script> --}}
+<script  src="{{asset('assets')}}/cdn-cgi/abc.min.js" ></script>
 
  @yield("js")
 

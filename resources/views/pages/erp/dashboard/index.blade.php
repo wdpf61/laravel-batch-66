@@ -1,4 +1,4 @@
-@extends("layout.erp.app");
+@extends("layout.erp.app")
 
 @section("content")
 
