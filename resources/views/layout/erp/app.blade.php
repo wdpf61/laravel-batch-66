@@ -178,7 +178,7 @@
 {{-- <script src="{{asset('assets')}}/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="de90384026a73b34442fd480-|50" ></script> --}}
 <script  src="{{asset('assets')}}/cdn-cgi/abc.min.js" ></script>
 
- @yield("js")
+ @stack("js")
 
 </body>
 

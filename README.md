@@ -57,8 +57,33 @@ DB::enableQueryLog();
 // run code
 dd(DB::getQueryLog());
 
-ajax 
 
+fetch function 
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+fetch( `${ url}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrfToken,
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+        name: 'John Doe',
+        email: 'john@example.com'
+    })
+})
+.then(res =>res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+
+
+
+
+
+ajax 
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': '{{ csrf_token() }}'

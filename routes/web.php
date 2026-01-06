@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassnameController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Mail\UserNotification;
@@ -52,7 +53,7 @@ Route::get("/student/update/{id}/{name}", [StudentController::class, 'update']);
 Route::get("/student/delete/{id}", [StudentController::class, 'delete']);
 
 
-Route::prefix("customer")->controller(CustomerController::class)->middleware(['auth'])->group(function () {
+Route::prefix("customer")->controller(CustomerController::class)->group(function () {
     Route::get("/", "index");
     Route::get("create", "create");
     Route::post("save", "save");
@@ -62,6 +63,7 @@ Route::prefix("customer")->controller(CustomerController::class)->middleware(['a
     Route::get("trashed", "trashed");
     Route::get("restore/{id}", "restore");
     Route::delete("force-delete/{id}", "force_delete");
+    Route::get("find/{id}", "find");
 });
 
 Route::prefix("system")->group(function () {
@@ -88,3 +90,5 @@ Route::match(['get', 'post'],'/logout', [LoginController::class,'logout'])->name
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource("orders", OrderController::class);

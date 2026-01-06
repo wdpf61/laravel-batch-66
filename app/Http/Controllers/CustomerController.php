@@ -167,4 +167,10 @@ class CustomerController extends Controller
 
        return "Mail has been sent successfully";
     }
+
+
+    function find($id){
+        $customer= Customer::find($id);
+        return response()->json($customer);
+    }
 }
