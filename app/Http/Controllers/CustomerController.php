@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MakeUser;
 use App\Mail\UserNotification;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,14 +34,13 @@ class CustomerController extends Controller
         // $customers = Customer::orderBy("id", "desc")->paginate(8);
 
 
-        $customers = Customer::when($request->search, function($query) use($request) {
-          return $query->whereAny([
-            "name",
-            "email",
-             "id",
-             "phone"
-        ], "LIKE" , "%".$request->search."%" );
-
+        $customers = Customer::when($request->search, function ($query) use ($request) {
+            return $query->whereAny([
+                "name",
+                "email",
+                "id",
+                "phone"
+            ], "LIKE", "%" . $request->search . "%");
         })->orderBy("id", "desc")->paginate(8);
 
         //  $customers = Customer::select("id", "name", 'address')->paginate(8);
@@ -56,13 +58,13 @@ class CustomerController extends Controller
     }
     function force_delete($id)
     {
-         Customer::withTrashed()->find($id)->forceDelete();
+        Customer::withTrashed()->find($id)->forceDelete();
         return redirect("customer/trashed");
     }
 
     function restore($id)
     {
-         Customer::withTrashed()->find($id)->restore();
+        Customer::withTrashed()->find($id)->restore();
         return redirect("customer");
     }
 
@@ -83,7 +85,7 @@ class CustomerController extends Controller
     {
         // required | email | min | max | numeric | unique | confirmed | nullable
 
-        print_r($request->all());
+        // print_r($request->all());
 
         $request->validate(
             [
@@ -112,6 +114,24 @@ class CustomerController extends Controller
         $customer->photo = $imgname;
         $customer->save();
 
+
+        event(new MakeUser($customer));
+        // Event::dispatch();
+
+        // $user = new User();
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->mobile = $request->phone;
+
+        // $user->photo = $imgname;
+        // $user->password = Hash::make(12345678);
+
+        // $user->save();
+
+        // $customer->user_id= $user->id;
+        // $customer->save();
+
+
         // Mail::to($request->email)->send(new UserNotification($customer));
 
         //   echo "saved";
@@ -124,7 +144,7 @@ class CustomerController extends Controller
         // print_r($request->all());
         $customer = Customer::find($id);
 
-        Gate::authorize("updateCustomer", $customer );
+        Gate::authorize("updateCustomer", $customer);
 
         $customer->name = $request->name;
         $customer->email = $request->email;
@@ -159,18 +179,19 @@ class CustomerController extends Controller
     }
     function sendmail()
     {
-        $users= User::all();
+        $users = User::all();
         foreach ($users as $key => $user) {
-        //    Mail::to($user->email)->send(new UserNotification($user));
-           Mail::to($user->email)->queue(new UserNotification($user));
+            //    Mail::to($user->email)->send(new UserNotification($user));
+            Mail::to($user->email)->queue(new UserNotification($user));
         }
 
-       return "Mail has been sent successfully";
+        return "Mail has been sent successfully";
     }
 
 
-    function find($id){
-        $customer= Customer::find($id);
+    function find($id)
+    {
+        $customer = Customer::find($id);
         return response()->json($customer);
     }
 }
