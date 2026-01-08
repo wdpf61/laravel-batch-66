@@ -1,266 +1,197 @@
-@extends('layout.erp.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
 
-@section('content')
-    <div class="row">
-        <div class="col-md-10 mx-auto">
-            <div>
-                <div class="d-flex align-items-center justify-content-between flex-wrap row-gap-3 mb-3">
-                    <h6><a href="invoices.html"><i class="isax isax-arrow-left me-2"></i>Invoice (Admin)</a></h6>
-                    <div class="d-flex align-items-center flex-wrap row-gap-3">
-                        <a href="#" class="btn btn-outline-white d-inline-flex align-items-center me-3"><i
-                                class="isax isax-document-like me-1"></i>Download PDF</a>
-                        <a href="#" class="btn btn-outline-white d-inline-flex align-items-center me-3"><i
-                                class="isax isax-message-notif me-1"></i>Send Email</a>
-                        <a href="#" class="btn btn-outline-white d-inline-flex align-items-center me-3"><i
-                                class="isax isax-printer me-1"></i>Print</a>
-                        <a href="#" class="btn btn-primary d-inline-flex align-items-center"
-                            data-bs-toggle="offcanvas" data-bs-target="#customcanvas">
-                            <i class="isax isax-eye me-1"></i>View Details
-                        </a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="bg-light p-4 rounded position-relative mb-3">
-                            <div class="position-absolute top-0 end-0 z-0">
-                                <img alt="img" data-cfsrc="assets/img/bg/card-bg.png"
-                                    style="display:none;visibility:hidden;"><noscript><img src="assets/img/bg/card-bg.png"
-                                        alt="img"></noscript>
-                            </div>
-                            <div
-                                class="d-flex align-items-center justify-content-between border-bottom flex-wrap mb-3 pb-2 position-relative z-1">
-                                <div class="mb-3">
-                                    <h4 class="mb-1">Invoice</h4>
-                                    <div class="d-flex align-items-center flex-wrap row-gap-3">
-                                        <div class="me-4">
-                                            <h6 class="fs-14 fw-semibold mb-1">Dreams Technologies Pvt Ltd.,</h6>
-                                            <p>15 Hodges Mews, High Wycombe HP12 3JL, United Kingdom</p>
-                                        </div>
-                                        <span><img alt="img" width="48" height="48"
-                                                data-cfsrc="assets/img/icons/not-paid.png"
-                                                style="display:none;visibility:hidden;"><noscript><img
-                                                    src="assets/img/icons/not-paid.png" alt="img" width="48"
-                                                    height="48"></noscript></span>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <img src="assets/img/invoice-logo.svg" class="invoice-logo-dark" alt="img">
-                                    <img src="assets/img/invoice-logo-white-2.svg" class="invoice-logo-white"
-                                        alt="img">
-                                </div>
-                            </div>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
 
-                            <!-- start row -->
-                            <div class="row gy-3 position-relative z-1">
-                                <div class="col-lg-4">
-                                    <div>
-                                        <h6 class="mb-2 fs-16 fw-semibold">Invoice Details</h6>
-                                        <div>
-                                            <p class="mb-1">Invoice Number : <span class="text-dark">INV215654</span></p>
-                                            <p class="mb-1">Issued On : <span class="text-dark">25 Jan 2025</span></p>
-                                            <p class="mb-1">Due Date : <span class="text-dark">31 Jan 2025</span></p>
-                                            <p class="mb-1">Recurring Invoice : <span class="text-dark">Monthly</span></p>
-                                            <span class="badge bg-danger badge-sm">Due in 8 days</span>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                                <div class="col-lg-4">
-                                    <div>
-                                        <h6 class="mb-2 fs-16 fw-semibold">Billing From</h6>
-                                        <div>
-                                            <h6 class="fs-14 fw-semibold mb-1">Kanakku Invoice Management</h6>
-                                            <p class="mb-1">15 Hodges Mews, HP12 3JL, United Kingdom</p>
-                                            <p class="mb-1">Phone : +1 54664 75945</p>
-                                            <p class="mb-1">Email : info@example.com</p>
-                                            <p class="mb-0">GST : 243E45767889</p>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                                <div class="col-lg-4">
-                                    <div>
-                                        <h6 class="mb-2 fs-16 fw-semibold">Billing To</h6>
-                                        <div class="bg-white rounded p-3">
-                                            <div class="d-flex align-items-center mb-1">
-                                                <img src="assets/img/icons/billing-to-image.svg" alt="img"
-                                                    class="avatar avatar-lg me-2">
-                                                <div>
-                                                    <h6 class="fs-14 fw-semibold">Timesquare Tech</h6>
-                                                </div>
-                                            </div>
-                                            <p class="mb-1">299 Star Trek Drive, Florida, 3240, USA</p>
-                                            <p class="mb-1">Phone : +1 54664 75945</p>
-                                            <p class="mb-1">Email : info@example.com</p>
-                                            <p class="mb-0">GST : 243E45767889</p>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                            </div>
-                            <!-- end row -->
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: DejaVu Sans, Arial, Helvetica, sans-serif;
+            background-color: #f8f9fa;
+            font-size: 12px;
+        }
 
-                        </div>
-                        <div class="mb-3">
-                            <h6 class="mb-3">Product / Service Items</h6>
-                            <div class="table-responsive rounded border-bottom-0 border table-nowrap">
-                                <table class="table m-0">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Product/Service</th>
-                                            <th>Quantity</th>
-                                            <th>Unit</th>
-                                            <th>Rate</th>
-                                            <th>Discount</th>
-                                            <th>Tax (%)</th>
-                                            <th>Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="text-dark">T-Shirt</td>
-                                            <td>2</td>
-                                            <td>Pcs</td>
-                                            <td>$200.00</td>
-                                            <td>10%</td>
-                                            <td>$36.00</td>
-                                            <td>$396.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="text-dark">Office Chair</td>
-                                            <td>1</td>
-                                            <td>Pcs</td>
-                                            <td>$350.00</td>
-                                            <td>5%</td>
-                                            <td>$33.25</td>
-                                            <td>$365.75</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="text-dark">LED Monitor</td>
-                                            <td>1</td>
-                                            <td>Pcs</td>
-                                            <td>$399.00</td>
-                                            <td>2%</td>
-                                            <td>$39.10</td>
-                                            <td>$398.90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="text-dark">Smartphone</td>
-                                            <td>4</td>
-                                            <td>Pcs</td>
-                                            <td>$100.00</td>
-                                            <td>10%</td>
-                                            <td>$36.00</td>
-                                            <td>$396.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="border-bottom mb-3">
+        table {
+            border-collapse: collapse;
+        }
 
-                            <!-- start row -->
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="d-flex align-items-center p-4 mb-3">
-                                        <div class="me-3">
-                                            <p class="mb-2">Scan to the pay</p>
-                                            <span><img alt="QR" data-cfsrc="assets/img/icons/qr.png"
-                                                    style="display:none;visibility:hidden;"><noscript><img
-                                                        src="assets/img/icons/qr.png" alt="QR"></noscript></span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-2">Bank Details</h6>
-                                            <div>
-                                                <p class="mb-1">Bank Name : <span class="text-dark">ABC Bank</span></p>
-                                                <p class="mb-1">Account Number : <span
-                                                        class="text-dark">782459739212</span></p>
-                                                <p class="mb-1">IFSC Code : <span class="text-dark">ABC0001345</span>
-                                                </p>
-                                                <p class="mb-0">Payment Reference : <span
-                                                        class="text-dark">INV-20250220-001</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                                <div class="col-lg-6">
-                                    <div class="mb-3 p-4">
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h6 class="fs-14 fw-semibold">Amount</h6>
-                                            <h6 class="fs-14 fw-semibold">$1,793.12</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h6 class="fs-14 fw-semibold">CGST (9%)</h6>
-                                            <h6 class="fs-14 fw-semibold">$18</h6>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h6 class="fs-14 fw-semibold">SGST (9%)</h6>
-                                            <h6 class="fs-14 fw-semibold">$18</h6>
-                                        </div>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-                                            <h6 class="fs-14 fw-semibold">Discount</h6>
-                                            <h6 class="fs-14 fw-semibold text-danger">$18</h6>
-                                        </div>
-                                        <div
-                                            class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-                                            <h6>Total (USD)</h6>
-                                            <h6>$1,972.43</h6>
-                                        </div>
-                                        <div>
-                                            <h6 class="fs-14 fw-semibold mb-1">Total In Words</h6>
-                                            <p>Five Hundred &amp; Ninety Six Dollars</p>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                            </div>
-                            <!-- end row -->
+        .wrapper {
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
 
-                        </div>
+        .invoice-box {
+            width: 100%;
+            max-width: 700px;
+            background: #ffffff;
+            margin: 0 auto;
+            padding: 30px;
+        }
 
-                        <!-- start row -->
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="mb-3">
-                                    <div class="mb-3">
-                                        <h6 class="fs-14 fw-semibold mb-1">Terms and Conditions</h6>
-                                        <p>The Payment must be returned in the same condition.</p>
-                                    </div>
-                                    <div>
-                                        <h6 class="fs-14 fw-semibold mb-1">Notes</h6>
-                                        <p>All charges are final and include applicable taxes, fees, and additional costs
-                                        </p>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-                            <div class="col-lg-5">
-                                <div class="text-lg-end mb-3">
-                                    <span><img class="sign-dark" alt="img" data-cfsrc="assets/img/icons/sign.png"
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="assets/img/icons/sign.png" class="sign-dark"
-                                                alt="img"></noscript></span>
-                                    <h6 class="fs-14 fw-semibold mb-1">Ted M. Davis</h6>
-                                    <p>Manager</p>
-                                </div>
-                            </div><!-- end col -->
-                        </div>
-                        <!-- end row -->
+        .text-right {
+            text-align: right;
+        }
 
-                        <div class="bg-light d-flex align-items-center justify-content-between p-4 rounded card-bg">
-                            <div>
-                                <h6 class="fs-14 fw-semibold mb-1">Dreams Technologies Pvt Ltd.,</h6>
-                                <p>15 Hodges Mews, High Wycombe HP12 3JL, United Kingdom</p>
-                            </div>
-                            <div>
-                                <img src="assets/img/invoice-logo.svg" class="invoice-logo-dark" alt="img">
-                                <img src="assets/img/invoice-logo-white-2.svg" class="invoice-logo-white" alt="img">
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div>
-        </div><!-- end col -->
-    </div>
-@endsection
+        .text-center {
+            text-align: center;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+
+<body>
+
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="center">
+
+            <!-- Invoice Box -->
+            <table class="invoice-box" width="100%" cellpadding="0" cellspacing="0">
+
+                <!-- Header -->
+                <tr>
+                    <td width="50%" valign="top">
+                        <h2 style="margin:0;font-size:24px;">INVOICE</h2>
+                        <p style="margin:5px 0;"><strong>Invoice #:</strong> INV-001</p>
+                        <p style="margin:0;"><strong>Date:</strong> {{ now()->format('d M Y') }}</p>
+                    </td>
+
+                    <td width="50%" valign="top" class="text-right">
+                        <h4 style="margin:0;">Your Company Name</h4>
+                        <p style="margin:5px 0;">Dhaka, Bangladesh</p>
+                        <p style="margin:0;">Email: info@company.com</p>
+                        <p style="margin:0;">Phone: +880 1234 567890</p>
+                    </td>
+                </tr>
+
+                <tr><td colspan="2" height="25"></td></tr>
+
+                <!-- Billing -->
+                <tr>
+                    <td valign="top">
+                        <h4 style="margin-bottom:5px;">Billed To:</h4>
+                        <p style="margin:3px 0;">
+                            <strong>{{ $order->customer?->name }}</strong>
+                        </p>
+                        <p style="margin:3px 0;">
+                            {{ $order->customer?->mobile }}
+                        </p>
+                        <p style="margin:3px 0;">
+                            {{ $order->customer?->email }}
+                        </p>
+                    </td>
+
+                    <td valign="top" class="text-right">
+                        <h4 style="margin-bottom:5px;">Payment Method</h4>
+                        <p style="margin:3px 0;">Cash / Bank / Mobile Banking</p>
+                    </td>
+                </tr>
+
+                <tr><td colspan="2" height="25"></td></tr>
+
+                <!-- Items -->
+                <tr>
+                    <td colspan="2">
+
+                        <table width="100%" cellpadding="8" cellspacing="0">
+                            <thead>
+                            <tr style="background:#f1f1f1;">
+                                <th align="left" style="border:1px solid #ddd;">#</th>
+                                <th align="left" style="border:1px solid #ddd;">Item</th>
+                                <th align="right" style="border:1px solid #ddd;">Price</th>
+                                <th align="right" style="border:1px solid #ddd;">Qty</th>
+                                <th align="right" style="border:1px solid #ddd;">Discount</th>
+                                <th align="right" style="border:1px solid #ddd;">Subtotal</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach ($order->order_details as $key => $details)
+                                <tr>
+                                    <td style="border:1px solid #ddd;">{{ $key + 1 }}</td>
+                                    <td style="border:1px solid #ddd;">
+                                        {{ $details->product->name }}
+                                    </td>
+                                    <td style="border:1px solid #ddd;" align="right">
+                                        {{ number_format($details->price, 2) }}
+                                    </td>
+                                    <td style="border:1px solid #ddd;" align="right">
+                                        {{ $details->qty }}
+                                    </td>
+                                    <td style="border:1px solid #ddd;" align="right">
+                                        {{ number_format($details->discount, 2) }}
+                                    </td>
+                                    <td style="border:1px solid #ddd;" align="right">
+                                        {{ number_format(($details->qty * $details->price) - $details->discount, 2) }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+
+                        </table>
+
+                    </td>
+                </tr>
+
+                <tr><td colspan="2" height="20"></td></tr>
+
+                <!-- Totals -->
+                <tr>
+                    <td></td>
+                    <td>
+
+                        <table width="100%" cellpadding="6" cellspacing="0">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td class="text-right">
+                                    {{ number_format($order->subtotal ?? 0, 2) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <td class="text-right">
+                                    {{ number_format($order->tax ?? 0, 2) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:14px;"><strong>Grand Total</strong></td>
+                                <td style="font-size:14px;" class="text-right">
+                                    <strong>{{ number_format($order->total ?? 0, 2) }}</strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td colspan="2" class="text-center" style="padding-top:25px;">
+                        <p style="margin:0;color:#777;">
+                            Thank you for your business!
+                        </p>
+                        <small style="color:#999;">
+                            This is a computer-generated invoice.
+                        </small>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

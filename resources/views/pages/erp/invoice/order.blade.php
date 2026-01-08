@@ -127,7 +127,8 @@
 
             <!-- Footer -->
             <div class="text-center mt-4">
-                <p class="text-muted mb-1">Thank you for your business!</p>
+                <p class="text-muted mb-1"> <button onclick="order_submit()" class="btn btn-secondary">Place Order</button>
+                </p>
                 <strong>This is a computer-generated invoice.</strong>
             </div>
 
@@ -198,13 +199,13 @@
 
             let total = 0;
             let total_discount = 0;
-            let total_subtotal=0;
+            let total_subtotal = 0;
 
 
             cart.forEach(item => {
-                total += item.subtotal;
+                total_subtotal += item.subtotal;
                 total_discount += item.discount;
-                total_subtotal += item.price * item.qty;
+                total += item.price * item.qty;
             });
 
 
@@ -212,9 +213,9 @@
             console.log("total", total);
             console.log("total_discount", total_discount);
 
-            document.querySelector(".grand_total").innerText=total
-            document.querySelector(".grand_discount").innerText=total_discount
-            document.querySelector("grand_subtotal").innerText=
+            document.querySelector(".grand_total").innerText = total_subtotal
+            document.querySelector(".grand_discount").innerText = total_discount
+            document.querySelector(".grand_subtotal").innerText = total
 
             print()
         }
@@ -246,6 +247,37 @@
         function handle_delete(id) {
             cart = cart.filter(item => item.id != id);
             print()
+        }
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+
+
+
+        function order_submit() {
+            let customer_id = document.querySelector("#customer_id").value;
+            let product = cart;
+            console.log(customer_id, product);
+
+            //   let url= `{{ URL('orders') }}`
+            let url = `{{ route('orders.store') }}`
+
+            fetch(`${url}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                       customer_id,
+                       product
+                    })
+                })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.error(err));
+
+
         }
     </script>
 @endpush
