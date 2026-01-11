@@ -247,3 +247,8 @@ php artisan jetstream:install livewire --teams
 
     // // RAW QUERIES
     // $users = DB::select("SELECT * FROM users WHERE status = ?", ['active']);
+
+
+Api 
+php artisan install:api
+php artisan make:controller Api/CustomerController --api

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->string("fullname")->nullable(true);
-        });
+        // Schema::table('customers', function (Blueprint $table) {
+        //     $table->string("fullname")->nullable(true);
+        // });
     }
 
     /**
