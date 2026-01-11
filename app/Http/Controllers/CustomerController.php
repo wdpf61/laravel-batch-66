@@ -106,12 +106,17 @@ class CustomerController extends Controller
             $request->file("photo")->storeAs("photo/customer", $imgname, "public");
         }
 
+
+
         $customer = new Customer();
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
         $customer->photo = $imgname;
+
+        Gate::authorize(" CustomerCreate", $customer);
+
         $customer->save();
 
 

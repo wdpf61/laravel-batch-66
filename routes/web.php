@@ -66,7 +66,7 @@ Route::prefix("customer")->controller(CustomerController::class)->group(function
     Route::get("find/{id}", "find");
 });
 
-Route::prefix("system")->group(function () {
+Route::prefix("system")->middleware(["auth", "admin"])->group(function () {
     Route::get("users/trashed", [UserController::class,"trashed"])->name("user.trashed");
     Route::get("users/restore/{id}", [UserController::class,"restore"])->name("user.restore");
     Route::delete("users/force-delete/{id}", [UserController::class,"force_delete"])->name("user.delete");
@@ -86,9 +86,6 @@ Route::fallback(function () {
 Auth::routes();
 
 Route::match(['get', 'post'],'/logout', [LoginController::class,'logout'])->name('logout');
-
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource("orders", OrderController::class);

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class CreateUserListener
 {
+    use InteractsWithQueue;
     /**
      * Create the event listener.
      */

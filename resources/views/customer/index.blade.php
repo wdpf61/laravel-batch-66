@@ -14,8 +14,9 @@
 
 
 
-
-    <x-button :url="URL('customer/create')" type="primary">Create Customer</x-button>
+    @can("CustomerCreate")
+      <x-button :url="URL('customer/create')" type="primary">Create Customer</x-button>
+    @endcan
 
     <table class="table">
         <thead>
@@ -49,16 +50,14 @@
 
 
 
-                         @can("delete_customer", $customer)
-
-
-                        <form action="{{ URL('customer/delete', $customer->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button onclick="return confirm(`Are you sure`)" type="submit"
-                                class="btn btn-danger">Delete</button>
-                        </form>
-                       @endcan
+                        @can('delete_customer', $customer)
+                            <form action="{{ URL('customer/delete', $customer->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button onclick="return confirm(`Are you sure`)" type="submit"
+                                    class="btn btn-danger">Delete</button>
+                            </form>
+                        @endcan
 
                     </td>
 
