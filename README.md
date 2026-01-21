@@ -260,3 +260,55 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 php artisan migrate
 user HasApiTokens in user Model
 https://www.itsolutionstuff.com/post/laravel-11-rest-api-authentication-using-sanctum-tutorialexample.html
+
+
+Notification 
+
+php artisan notifications:table
+php artisan migrate
+
+php artisan make:notification OrderCreated
+
+return ['mail', 'database'];
+
+use Notifiable;
+$user = User::find(1);
+$user->notify(new OrderCreated($order));
+
+auth()->user()->notifications;
+auth()->user()->readNotifications;
+auth()->user()->unreadNotifications;
+auth()->user()->unreadNotifications->markAsRead();
+auth()->user()->unreadNotifications->count();
+
+$notification = auth()->user()->notifications()->find($id);
+$notification->update([
+    'read_at' => null,
+]);
+
+public function markAsRead($id)
+{
+        auth()->user()
+            ->unreadNotifications
+            ->where('id', $id)
+            ->first()
+            ?->markAsRead();
+
+        return back();
+}
+
+
+@foreach(auth()->user()->unreadNotifications as $notification)
+    <div>
+        <strong>{{ $notification->data['message'] }}</strong>
+
+        <a href="{{ $notification->data['url'] }}">View</a>
+
+        <form action="{{ route('notification.read', $notification->id) }}" method="POST">
+            @csrf
+            <button>Mark as read</button>
+        </form>
+    </div>
+@endforeach
+
+

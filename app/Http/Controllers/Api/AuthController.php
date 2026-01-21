@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
 
 
-public function register(Request $request)
+    public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -20,17 +20,28 @@ public function register(Request $request)
             'password' => 'required',
         ]);
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation Error',
+                'errors'  => $validator->errors(),
+            ], 422);
         }
 
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
+        $input['password'] = bcrypt($input['password']);  //Hash::make($value)
         $user = User::create($input);
         $success['token'] =  $user->createToken('api-token')->plainTextToken;
         $success['name'] =  $user->name;
 
         return $this->sendResponse($success, 'User register successfully.');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => $success,
+                'message' => 'User register successfully.',
+                'name'  =>  $user->name,
+            ], 200);
+        }
     }
 
 
