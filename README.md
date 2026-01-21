@@ -252,3 +252,11 @@ php artisan jetstream:install livewire --teams
 Api 
 php artisan install:api
 php artisan make:controller Api/CustomerController --api
+
+Sanctum 
+
+composer require laravel/sanctum
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+user HasApiTokens in user Model
+https://www.itsolutionstuff.com/post/laravel-11-rest-api-authentication-using-sanctum-tutorialexample.html
