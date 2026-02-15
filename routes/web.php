@@ -1,5 +1,6 @@
 <?php
 
+use App\Facades\Payment;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClassnameController;
 use App\Http\Controllers\CustomerController;
@@ -7,13 +8,32 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Mail\UserNotification;
+use App\Services\PaymentService;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
+
+
+//  class Car{
+//         public $name="Corolla";
+//         function nameCart(){
+//             return $this->name;
+//         }
+//     }
+
+//     app()->bind(Car::class);
+
+//   dd(app());
+
 Route::get('/', function () {
-    return view("pages.erp.dashboard.index");
-})->middleware('auth');
+
+    // $payment= new PaymentService();
+    // $payment->pay();
+    // app(PaymentService::class)->pay();
+     Payment::pay();
+});
 
 
 
