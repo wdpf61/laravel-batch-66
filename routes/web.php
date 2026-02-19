@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Mail\UserNotification;
+use App\Models\User;
 use App\Services\PaymentService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
-    // $payment= new PaymentService();
-    // $payment->pay();
-    // app(PaymentService::class)->pay();
-     Payment::pay();
+    // // $payment= new PaymentService();
+    // // $payment->pay();
+    // // app(PaymentService::class)->pay();
+    //  Payment::pay();
+
+     $users= User::ByRole(2)->get();
+     return response()->json($users);
+
 });
 
 
