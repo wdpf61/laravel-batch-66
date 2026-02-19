@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Customer;
 use App\Models\User;
 use App\Policies\CustomerPolicy;
+use App\Repositories\Interface\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
          Paginator::useBootstrapFive();
+         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**

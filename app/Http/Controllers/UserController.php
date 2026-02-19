@@ -3,21 +3,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Repositories\Interface\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+     protected $userRepo;
+     public function __construct(UserRepositoryInterface $userRepo)
+     {
+         $this->userRepo= $userRepo;
+     }
     /**
      * Display a listing of the resource.
      */
    public function index(){
-      $users= User::with("role:id,name")->get();
+    //   $users= User::with("role:id,name")->get();
     //   $users=Role::with("user")->get();
     //   $users= User::select("id","name","email")->paginate(15);
     //   return view("pages.erp.user.index", ["users"=>$users]);
 
-      return view("pages.erp.user.index", compact("users"));
+    //   return view("pages.erp.user.index", compact("users"));
+
+
+      $users= $this->userRepo->getAllUser();
 
       return $users;
 

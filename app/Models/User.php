@@ -77,8 +77,6 @@ class User extends Authenticatable
        );
     }
 
-
-    
     // query scope
     function scopeByRole($query,$id){
        return $query->where("role_id", $id);
